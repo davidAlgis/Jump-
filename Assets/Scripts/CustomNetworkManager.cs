@@ -9,7 +9,8 @@ public class CustomNetworkManager : NetworkLobbyManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        //print("--------------------add player on server------------------");
+        Debug.Log("--------------------add player on server------------------");
+        
         base.OnServerAddPlayer(conn, playerControllerId);
     }
 
@@ -21,7 +22,7 @@ public class CustomNetworkManager : NetworkLobbyManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
     {
-        //print("--------------------add player on server------------------");
+        print("--------------------add player on server------------------");
         Vector3 posToSpawn;
         if (numPlayers % 2 == 0)
         {

@@ -12,56 +12,33 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private bool m_grounded = false;
+    [SerializeField]
+    private Transform m_groundedTransform;
+    [SerializeField]
+    private LayerMask m_whatIsGrounded;
+    [SerializeField]
+    private float m_radiusCollision = 0.3f;
+
     private Rigidbody2D m_rigidbody = new Rigidbody2D();
 
 
-    // Utilisez cette fonction pour l'initialisation
     void Awake()
     {
         if (TryGetComponent(out m_rigidbody) == false)
             Debug.LogError("Unable to find any rigidbody attached to the player GO");
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        /*if (isLocalPlayer == false)
-            return;*/
-
-        if (col.gameObject.tag == "Ground") 
-        {
-            m_grounded = true;
-        }
-    }
-   
-    private void OnCollisionExit2D(Collision2D col)
-    {
 
 
-        if (col.gameObject.tag == "Ground") 
-        {
-            m_grounded = false;
-        }
-    }
-
-
-
-    // Update est appelee une fois par frame
     void Update()
     {
-
-        /*if (TryGetComponent(out PlayerNetwork playerNetwork))
-            print("id of " + gameObject.name + " is " + playerNetwork.IdPlayer);*/
         if ((Input.GetButtonDown("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && m_grounded)
-        {
             m_jump = true;
-        }
-        
-
     }
 
     void FixedUpdate()
     {
-
+        m_grounded = Physics2D.OverlapCircle(m_groundedTransform.position, m_radiusCollision, m_whatIsGrounded);
 
         //apply a constant forces. 
         if (m_rigidbody.velocity.x < m_maxSpeed)

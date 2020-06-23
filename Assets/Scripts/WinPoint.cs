@@ -10,8 +10,9 @@ public class WinPoint : MonoBehaviour
         
         if (collision.gameObject.tag == "Player")
         {
-            UIManager.Instance.enableDisableMessageOnScreen("Gagner !!", true);
-            GameManager.Instance.reloadLevel();
+            print("You win");
+            //UIManager.Instance.enableDisableMessageOnScreen("Gagner !!", true);
+            //GameManager.Instance.reloadLevel();
         }
     }
 

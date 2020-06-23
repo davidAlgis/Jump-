@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     private static UIManager m_instance;
 
+
+
     public static UIManager Instance
     {
         get
