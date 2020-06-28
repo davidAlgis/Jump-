@@ -5,7 +5,10 @@ using UnityEngine.Networking.Match;
 public class CustomNetworkManager : NetworkLobbyManager
 {
     
-    
+    public void reloadScene()
+    {
+        ServerChangeScene("Demo");
+    }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {

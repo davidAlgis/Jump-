@@ -9,18 +9,21 @@ public class Player : MonoBehaviour
     public float m_moveForce = 100f;
     public float m_maxSpeed = 5f;
     public float m_jumpForce = 100f;
+    private bool m_stopMove = false;
 
     [SerializeField]
     private bool m_grounded = false;
     [SerializeField]
-    private Transform m_groundedTransform;
+    private Transform m_groundedTransform = default;
     [SerializeField]
-    private LayerMask m_whatIsGrounded;
+    private LayerMask m_whatIsGrounded = default;
     [SerializeField]
     private float m_radiusCollision = 0.3f;
 
     private Rigidbody2D m_rigidbody = new Rigidbody2D();
 
+    public Transform GroundedTransform { get => m_groundedTransform; set => m_groundedTransform = value; }
+    public bool StopMove { get => m_stopMove; set => m_stopMove = value; }
 
     void Awake()
     {
@@ -38,7 +41,11 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (m_stopMove)
+            return;
+
         m_grounded = Physics2D.OverlapCircle(m_groundedTransform.position, m_radiusCollision, m_whatIsGrounded);
+
 
         //apply a constant forces. 
         if (m_rigidbody.velocity.x < m_maxSpeed)

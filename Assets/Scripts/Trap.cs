@@ -8,7 +8,15 @@ public class Trap : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            print("game over");
+            if (collision.gameObject.TryGetComponent(out Player player))
+                player.StopMove = true;
+            else
+                Debug.LogError("Unable to find any Player componement on player");
+
+            if (collision.gameObject.TryGetComponent(out PlayerNetwork playerNetwork))
+                playerNetwork.playerDie();
+            else
+                Debug.LogError("Unable to find any PlayerNetwork on player");
         }
     }
 }

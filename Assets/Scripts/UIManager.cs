@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     private static UIManager m_instance;
 
+    [SerializeField]
+    private Text m_messageText = default;
 
 
     public static UIManager Instance
@@ -16,26 +18,18 @@ public class UIManager : MonoBehaviour
         {
             if (m_instance == null)
             {
-                m_instance = GameObject.Find("MainUI").GetComponent<UIManager>();
+                m_instance = GameObject.Find("UIManager").GetComponent<UIManager>();
             }
             return m_instance;
         }
     }
 
+    public Text MessageText { get => m_messageText; set => m_messageText = value; }
 
     public void enableDisableMessageOnScreen(string message, bool enable)
     {
-        print("enable text message");
-        GameObject toEnableGO;
-        if (DebugTool.tryFindGOChildren(gameObject, "Message", out toEnableGO, LogType.Warning))
-        {
-
-            if (toEnableGO.TryGetComponent(out Text textToEnable))
-            {
-                textToEnable.text = message;
-                textToEnable.enabled = enable;
-            }
-        }
+        m_messageText.enabled = enable;
+        m_messageText.text = message;
     }
 
 

@@ -7,9 +7,9 @@ public class PlayerUI : MonoBehaviour
     public GameObject m_hideScreen;
 
 
-    public void showHideScreen()
+    public void showHideScreen(bool enable)
     {
-        m_hideScreen.SetActive(true);
+        m_hideScreen.SetActive(enable);
     }
 
 }
