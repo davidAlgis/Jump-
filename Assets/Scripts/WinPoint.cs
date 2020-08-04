@@ -10,7 +10,19 @@ public class WinPoint : MonoBehaviour
         
         if (collision.gameObject.tag == "Player")
         {
-            print("You win");
+            if (collision.gameObject.TryGetComponent(out Player player))
+                player.StopMove = true;
+            else
+                Debug.LogError("Unable to find any Player componement on player");
+
+            if (collision.gameObject.TryGetComponent(out PlayerNetwork playerNetwork))
+            {
+                playerNetwork.FinishTheLevel = true;
+                playerNetwork.playerWin();
+            }
+            else
+                Debug.LogError("Unable to find any PlayerNetwork on player");
+            //print("You win");
             //UIManager.Instance.enableDisableMessageOnScreen("Gagner !!", true);
             //GameManager.Instance.reloadLevel();
         }

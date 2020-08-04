@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
+using System.Threading;
 
 public class Utilities : MonoBehaviour
 {
@@ -53,6 +54,34 @@ public class Utilities : MonoBehaviour
 
 
 
+    public static T Choice<T>(IList<T> sequence, float[] distribution, float randomNumber = -1.0f)
+    {
+        float sum = 0;
+
+        var cumulative = distribution.Select(c => {
+            var result = c + sum;
+            sum += c;
+            return result;
+        }).ToList();
+
+
+        // now generate random double. It will always be in range from 0 to 1
+        float r;
+        if (randomNumber == -1.0f)
+            r = Random.Range(0.0f, 1.0f);
+        else
+            r = randomNumber;
+
+        var idx = cumulative.BinarySearch(r);
+
+        if (idx < 0)
+            idx = ~idx;
+        if (idx > cumulative.Count - 1)
+            idx = cumulative.Count - 1; 
+
+        return sequence[idx];
+        
+    }
 
 }
 

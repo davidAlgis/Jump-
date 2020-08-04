@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     private static GameManager m_instance;
 
     private int nbrOfPlayer = 0;
-
+    [SerializeField]
+    private LevelGeneration m_levelGenerator = null;
 
     [SerializeField]
     private GameObject m_currentCamera;
@@ -31,8 +32,17 @@ public class GameManager : MonoBehaviour
 
     public int NbrOfPlayer { get => nbrOfPlayer; set => nbrOfPlayer = value; }
     public GameObject CurrentCamera { get => m_currentCamera; set => m_currentCamera = value; }
+    public LevelGeneration LevelGenerator { get => m_levelGenerator; set => m_levelGenerator = value; }
+
 
     #endregion
+
+    public void Awake()
+    {
+        if(m_levelGenerator = null)
+            Debug.LogError("Unable to find any level generation");
+        
+    }
 
     public void enableDisableCurrentCamera(bool enable)
     {
@@ -47,6 +57,13 @@ public class GameManager : MonoBehaviour
     public void reloadLevel()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public int getActualSceneIndex()
+    {
+        int getIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("Scene index = " + getIndex);
+        return getIndex;
     }
 
 }

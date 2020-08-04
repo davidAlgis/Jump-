@@ -7,25 +7,51 @@ public class CustomNetworkManager : NetworkLobbyManager
     
     public void reloadScene()
     {
+        Debug.Log("load demo");
         ServerChangeScene("Demo");
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        print("on server disconnect");
+        base.OnServerDisconnect(conn);
+    }
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        //print("server load scene");
+        //GameManager.Instance.getActualSceneIndex();
+        //GameManager.Instance.LevelGenerator.initGeneration();
+        base.OnServerSceneChanged(sceneName);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        Debug.Log("--------------------add player on server------------------");
-        
+        //Debug.Log("--------------------add player on server------------------");
+        //GameManager.Instance.LevelGenerator.initGeneration();
         base.OnServerAddPlayer(conn, playerControllerId);
     }
 
     public override void OnStartClient(NetworkClient lobbyClient)
     {
-        //print("on start client");
         base.OnStartClient(lobbyClient);
+    }
+
+
+    public override void OnStartServer()
+    {
+        print("start sever on port network manager");
+        base.OnStartServer();
+
+    }
+
+    public override void OnStartHost()
+    {
+        base.OnStartHost();
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
     {
-        print("--------------------add player on server------------------");
+        print("--------------------add player on server2------------------");
         Vector3 posToSpawn;
         if (numPlayers % 2 == 0)
         {

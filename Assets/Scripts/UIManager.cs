@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Text m_messageText = default;
-
+    [SerializeField]
+    private Text m_messageDebug = default;
 
     public static UIManager Instance
     {
@@ -32,6 +33,24 @@ public class UIManager : MonoBehaviour
         m_messageText.text = message;
     }
 
+    public void debugMessageOnScreen(string message)
+    {
+        m_messageDebug.text = message;
+    }
 
+    public void fadeOut(Text text, float fadeOutTime = 2.0f)
+    {
+        StartCoroutine(FadeOutRoutine(text, fadeOutTime));
+    }
+
+    private IEnumerator FadeOutRoutine(Text text, float fadeOutTime)
+    {
+        Color originalColor = text.color;
+        for (float t = 0.01f; t < fadeOutTime; t += Time.deltaTime)
+        {
+            text.color = Color.Lerp(originalColor, Color.clear, Mathf.Min(1, t / fadeOutTime));
+            yield return null;
+        }
+    }
 
 }

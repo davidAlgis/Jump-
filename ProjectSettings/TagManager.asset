@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - ColorSecond
+  - ColorFirst
+  - SaveSpawn
   layers:
   - Default
   - TransparentFX
