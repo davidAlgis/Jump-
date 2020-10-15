@@ -4,4 +4,4 @@ Each player see the screen of the other players. Therefore, the players must com
 
 A video is available [here](https://youtu.be/2TkpPlhb2dk)
 
-![Prototype](gif/prototype0.1.gif)
+![jump](https://user-images.githubusercontent.com/1339741/96101617-f075b180-0ed5-11eb-9694-10c09314e150.gif)
